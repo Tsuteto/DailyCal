@@ -11,5 +11,5 @@ https://tsuteto.github.io/DailyCal/index.html
 ## 依存関係 (Dependencies)
 なし
 
-## 謝辞 (Acknowledgement)
+## 謝辞 (Acknowledgements)
 アプリ内「説明」ページに記載しています。
