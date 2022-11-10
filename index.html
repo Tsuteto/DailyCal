@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+    <title>日めくりカレンダー</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css"/>
+    <script src="lib/qreki.js"></script>
+    <script src="qreki_ext.js"></script>
+    <script src="consts.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <div class="bg-desktop"></div>
+    <div class="bg-lighting"></div>
+    <main>
+        <div class="cal-container">
+            <div class="binder">
+                <div class="pin"></div><div class="pin"></div>
+            </div>
+            <div class="paper-container">
+                <div class="paper-bound">
+                </div>
+                <div class="paper-flipped">
+                </div>
+            </div>
+            <div class="templates">
+                <article class="paper date date-template">
+                    <div class="paper-bg"></div>
+                    <div class="page-content loading">
+                        <div class="col-right">
+                            <div class="row">
+                                <section class="year-jp">
+                                    <span id="eraJp"></span><span id="yearJp" class="digits"></span>年</section>
+                                <section class="month">
+                                    <span id="month" class="month-num"></span><span class="month-label">月</span>
+                                </section>
+                            </div>
+                            <section class="len-of-month-mark"></section>
+                            <section class="events">
+                            </section>
+                            <section class="choku">
+                                <div class="label-choku">中段（12直）</div>
+                                <div class="choku-name"></div>
+                            </section>
+                            <section class="month-cal curr-month-cal"></section>
+                        </div>
+                        <div class="col-center">
+                            <section class="year-ad"></section>
+                            <div class="day-frame">
+                                <section class="day"></section>
+                                <section class="holiday-name"></section>
+                            </div>
+                        </div>
+                        <div class="col-left">
+                            <section class="weekday-jp"></section>
+                            <section class="weekday-en"></section>
+                            <div class="row row-lunar-info">
+                                <section id="rokuyo" class="rokuyo"></section>
+                                <section class="kyusei"></section>
+                                <section class="junishi"></section>
+                                <section class="jikkan"></section>
+                                <section class="lunar-date"><span class="lunar-date-mark">旧</span><span id="lunarM" class="digits"></span>月<span id="lunarD" class="digits"></span>日</section>
+                            </div>
+                            <section class="moon-age">
+                                <div class="moon-age-name"></div>
+                                <div class="moon-face"></div>
+                            </section>
+                            <section class="month-cal next-month-cal"></section>
+                        </div>
+                        <div class="bottom">
+                            <section class="nanajunikou">
+                                <div class="nanajunikou-label">七十二候</div>
+                                <div class="nanajunikou-name"></div>
+                                <div class="nanajunikou-desc"></div>
+                            </section>
+                            <section class="shuku">
+                                <div class="shuku-label">二十八宿</div>
+                                <div class="shuku-name"><span id="shukuName"></span></div>
+                                <div class="shuku-desc"></div>
+                            </section>
+                        </div>
+                    </div>
+                </article>
+                <article class="paper about-app about-app-template">
+                    <div class="paper-bg"></div>
+                    <div class="page-content">
+                        <section class="about-app-page">
+                            <h1>日めくりカレンダー</h1>
+                            <p class="author">つてと　作 <a href="https://twitter.com/tsuteto" target="_blank">@tsuteto</a></p>
+                            <p class="desc"><svg class="app-icon"><use xlink:href="svg/app-icon.svg#main"></use></svg></p>
+                            <p class="desc">ブラウザで動く日めくりカレンダーです。<br>
+                                インテリアとしてデスクトップに飾ってみてはいかがでしょうか。</p>
+                            <p class="desc">マウスや指で紙を下に引っ張ればめくれます。好きなだけめくれます。<br>
+                                リロードするか設定で日付を変えれば元に戻ります。<br>
+                                設定で自動でめくらせたり好きな日付へワープしたりもできます。<br>
+                                表示内容の正しさは保証しませんのでご容赦ください。</p>
+                        </section>
+                        <section class="about-app-page">
+                            <h2>カレンダーの見方</h2>
+                            <div class="legend legend-1">
+                                <svg class="legend-image">
+                                    <use xlink:href="svg/legend.svg#main"></use>
+                                </svg>
+                                <div class="legend-right">
+                                    <h3>①月の大小</h3>
+                                    <p>１ヶ月の長さを表します。<br>
+                                        ３１日→大　３０日以下→小<br>
+                                        旧暦では２９日と３０日が不規則に変わっていた名残です。</p>
+                                    <h3>②行事</h3>
+                                    <p>日々の記念日に加え、次のものが含まれます。<br>
+                                        ・二十四節気　・満月　・プレミアムフライデー<br>
+                                        ・彼岸　・社日　・土用　・入梅　・半夏生<br>……など<br>
+                                        記念日は開始年が設定されており、過去に遡ると表示されない場合があります。改暦以前は非対応です。</p>
+                                    <h3>③選日</h3>
+                                    <p>江戸時代に用いられた行動の吉凶を占うもので、次のものが含まれます。<br>
+                                        一粒万倍日、不成就日、天赦日、八専、天一天上、十方暮、犯土（大づち・小づち）、三隣亡、臘日、三伏日（初伏・中伏・末伏）</p>
+                                    <h3>④中段（１２直）</h3>
+                                    <p>中段、またの名を十二直といいます。暦注の一つで行動の吉凶を占うものです。</p>
+                                </div>
+                                <div class="legend-bottom">
+                                    <h3>⑤祝日名</h3>
+                                    <p>祝日は外部APIを使用して取得します。対応範囲は1948年から来年までです。それより未来は2022年時点の定義から計算します。</p>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="about-app-page">
+                            <h2>カレンダーの見方</h2>
+                            <div class="legend legend-2">
+                                <svg class="legend-image">
+                                    <use xlink:href="svg/legend.svg#main"></use>
+                                </svg>
+                                <div class="legend-left">
+                                    <h3>⑥九星</h3>
+                                    <p>日毎に一白・二黒・三碧・四緑・五黄・六白・七赤・八白・九紫が順繰りに変わっていきます。冬至・夏至付近の甲子日に切替えが発生し、それぞれ逆順から正順に、正順から逆順に移ります。</p>
+                                    <h3>⑦六曜</h3>
+                                    <p>日毎に先勝・友引・先負・仏滅・大安・赤口が順繰りに変わっていきます。旧暦１日に決まった位置にリセットされそこから再スタートとなります。一部仏教に関する言葉がありますが仏教とは無関係とのことです。</p>
+                                    <h3>⑧六十干支</h3>
+                                    <p>十干と十二支を組み合わせた、今日を表す呼び名。干と支の両方を一つずつ進めていき、６０日で一周します。１２×１０＝１２０通りとはなりません。</p>
+                                    <h3>⑨旧暦</h3>
+                                    <p>改暦以前の暦による日付です。月の満ち欠けを基準として新月で月を改め１日とするのに加え太陽の運行から閏月を挿入する太陰太陽暦です。</p>
+                                </div>
+                                <div class="legend-bottom">
+                                    <h3>⑩月の朔望・潮汐</h3>
+                                    <p>月の満ち欠けを図で表し、朔弦望の時には潮汐とともに記します。潮汐は気象庁の定義を使用しており他と異なる場合があります。</p>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="about-app-page">
+                            <h2>カレンダーの見方</h2>
+                            <div class="legend legend-3">
+                                <svg class="legend-image">
+                                    <use xlink:href="svg/legend.svg#main"></use>
+                                </svg>
+                                <div class="legend-left">
+                                    <h3>⑪七十二候</h3>
+                                    <p>太陽の黄道経度から二十四節気より細かな気候を表現します。読みと説明の出典はウィキペディアより。</p>
+                                    <h3>⑫二十八宿</h3>
+                                    <p>暦注の一つ。天球を２８に分け、その単位を宿といい、日毎に順繰りに割り当てられます。右側吉凶説明の出典はウィキペディアより。</p>
+                                    <h3>⑬月カレンダー</h3>
+                                    <p>右に当月、左に来月を配しています。○数字は祝日です。（一部ブラウザでは□数字になります。）</p>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="about-app-page">
+                            <h2>謝辞</h2>
+                            <p>旧暦、雑暦、七十二候、月太陽の黄経差等の算出のために使用しております。</p>
+                            <ul>
+                                <li>qreki.js: 旧暦計算サンプルプログラム rev. 1.1 - H.Takano (C)1993,1994 / Nagano Yutaka (C)1999</li>
+                            </ul>
+                            <p>記念日はこちらで調べさせていただきました。</p>
+                            <ul>
+                                <li><a href="https://zatsuneta.com/" target="_blank">雑学ネタ帳</a></li>
+                                <li><a href="https://www.nnh.to/" target="_blank">今日は何の日～毎日が記念日～</a></li>
+                                <li><a href="https://dic.nicovideo.jp/" target="_blank">ニコニコ大百科</a></li>
+                            </ul>
+                            <p>正しい祝日の取得はこちらのAPIを利用しております。</p>
+                            <ul>
+                                <li><a href="https://national-holidays.jp/" target="_blank">国民の祝日：日本</a></li>
+                            </ul>
+                            <p>背景の壁紙はこちらのフリー素材を使用しております。</p>
+                            <ul>
+                                <li><a href="https://www.beiz.jp/" target="_blank">BEIZ images</a></li>
+                                <li><a href="http://www.pixeden.com/" target="_blank">Pixeden.com</a></li>
+                            </ul>
+                            <h2>更新履歴</h2>
+                            <dl>
+                                <dt>Ver. 1.0.0</dt>
+                                <dd>初リリース</dd>
+                            </dl>
+                        </section>
+                        <section class="pager">
+                            <button class="btn-paper btn-prev">前</button>
+                            <span class="page-no"></span>
+                            <button class="btn-paper btn-next">次</button>
+                        </section>
+                    </div>
+                </article>
+                <article class="paper settings settings-template">
+                    <div class="paper-bg"></div>
+                    <div class="page-content">
+                        <h1>設定</h1>
+                        <section class="auto-flipping">
+                            <h2>自動日めくり</h2>
+                            <div class="switch">
+                                <span class="switch-label-off">切</span>
+                                <span class="switch-body"><input type="checkbox" class="chk-auto-flipping"></span>
+                                <span class="switch-label-on">入</span>
+                            </div>
+                            <p class="desc">
+                                日付が変わると自動でめくります。<br>
+                                （日をまたいだ時点で１日遅れになった場合のみ。）
+                            </p>
+                        </section>
+                        <section class="set-date">
+                            <h2>日付移動</h2>
+                            <div class="ymd-fields">
+                                <input type="date" class="input-date">
+                                <button class="btn-paper btn-move-date">移動</button>
+                            </div>
+                            <p class="desc">
+                                指定した日付に移動できます。<br>
+                                （URLの末尾に"?date=yyyy/mm/dd"を付けることでも可能です。）
+                            </p>
+                        </section>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="control-panel control-main">
+            <button class="btn btn-about-app">
+                <svg><use xlink:href="svg/info.svg#main"></use></svg><br>
+                説明
+            </button>
+            <button class="btn btn-settings">
+                <svg><use xlink:href="svg/gear.svg#main"></use></svg><br>
+                設定
+            </button>
+        </div>
+        <div class="control-panel control-sub hidden">
+            <button class="btn btn-close">
+                <svg><use xlink:href="svg/close.svg#main"></use></svg><br>
+                閉じる
+            </button>
+        </div>
+    </main>
+</body>
+</html>
