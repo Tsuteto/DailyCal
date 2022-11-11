@@ -907,11 +907,11 @@ svg {
     text-align: center;
 }
 
-.flick-arrow {
+.flick-guide svg {
     display: inline-block;
     width: 5em;
-    line-height: 2;
-    transform: scale(5, 2);
+    height: 3em;
+    vertical-align: middle;
 }
 
 .dw1 {

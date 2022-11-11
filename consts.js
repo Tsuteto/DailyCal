@@ -279,6 +279,7 @@ class Consts {
             {date: "02/23", onLunarCal: false, name: "富士山の日", since: 1996},
             {date: "02/23", onLunarCal: false, name: "税理士記念日", since: 1969},
             {date: "02/24", onLunarCal: false, name: "鉄道ストの日", since: 1898},
+            {date: "02/25", onLunarCal: false, name: "ヱビスの日", since: 2012},
             {date: "02/26", onLunarCal: false, name: "脱出の日", since: 1815},
             {date: "02/27", onLunarCal: false, name: "Pokémon Day", since: 2020},
             {date: "02/27", onLunarCal: false, name: "国際ホッキョクグマの日", since: 2005},
@@ -497,7 +498,7 @@ class Consts {
             {date: "06/25", onLunarCal: false, name: "サザンの日", since: 1978},
             {date: "06/25", onLunarCal: false, name: "百合の日", since: 2019},
             {date: "06/25", onLunarCal: false, name: "住宅デー", since: 1978},
-            {date: "06/26", onLunarCal: false, name: "ＧＵＭＩの日", since: 2009},
+            {date: "06/26", onLunarCal: false, name: "ＧＵＭＩ記念日", since: 2009},
             {date: "06/26", onLunarCal: false, name: "露天風呂の日", since: 1987},
             {date: "06/27", onLunarCal: false, name: "ちらし寿司の日", since: 2011},
             {date: "06/27", onLunarCal: false, name: "演説の日", since: 1874},
@@ -559,6 +560,7 @@ class Consts {
             {date: "07/22", onLunarCal: false, name: "著作権制度の日", since: 1899},
             {date: "07/23", onLunarCal: false, name: "ふみの日", since: 1979},
             {date: "07/23", onLunarCal: false, name: "米騒動の日", since: 1918},
+            {date: "07/24", onLunarCal: false, name: "テレワーク・デイ", since: 2017},
             {date: "07/25", onLunarCal: false, name: "大阪天満宮天神祭", since: null},
             {date: "07/25", onLunarCal: false, name: "かき氷の日"}, // 1933年の日本最高気温更新の翌年に仮置き
             {date: "07/26", onLunarCal: false, name: "アイドルマスター", since: 2005, anniv: true},
@@ -672,6 +674,7 @@ class Consts {
             {date: "09/12", onLunarCal: false, name: "マラソンの日", since: 1896}, // 最初のオリンピック開催年
             {date: "09/13", onLunarCal: false, name: "世界法の日", since: 1965},
             {date: "09/13", onLunarCal: false, name: "北斗の拳の日", since: 2018},
+            {date: "09/13", onLunarCal: false, name: "スーパーマリオ", since: 1985},
             {date: "09/14", onLunarCal: false, name: "コスモスの日", since: 1980}, // バレンタインデーが定着した頃
             {date: "09/14", onLunarCal: false, name: "ゲームキューブ", since: 2001, anniv: true},
             {date: "09/15", onLunarCal: false, name: "老人の日", since: 2003},
@@ -938,7 +941,7 @@ class Consts {
             {date: "12/21", onLunarCal: false, name: "回文の日", since: 2008}, // Google検索の最古ページ
             {date: "12/22", onLunarCal: false, name: "スープの日", since: 2020},
             {date: "12/22", onLunarCal: false, name: "ジェネリック医薬品の日", since: 2019},
-            {date: "12/23", onLunarCal: false, name: "上皇陛下誕生日", since: 2019},
+            {date: "12/23", onLunarCal: false, name: "上皇誕生日", since: 2019},
             {date: "12/23", onLunarCal: false, name: "東京タワー完成の日", since: 1958},
             {date: "12/23", onLunarCal: false, name: "テレホンカードの日", since: 1982},
             {date: "12/24", onLunarCal: false, name: "クリスマスイブ", since: 1874},
