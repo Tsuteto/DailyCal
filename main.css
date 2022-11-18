@@ -249,11 +249,28 @@ main {
 
 /* ------ RIGHT ------ */
 
-section.year-jp {
+.year-jp {
+    display: flex;
+    align-items: center;
     margin-top: 2vmin;
+    gap: 1vmin;
+
     font-family: "Public Sans", source-han-sans-japanese;
     font-weight: 900;
+}
+
+section.year-jp-present {
     font-size: 4vmin;
+}
+
+div.year-jp-separator {
+    font-size: 2vmin;
+    font-feature-settings: "vpal" 1;
+}
+
+section.year-jp-legacy {
+    line-height: 1.125;
+    font-size: 1.8vmin;
 }
 
 section.month {
@@ -611,7 +628,7 @@ section.shuku .shuku-name {
     font-weight: 700;
     font-size: 5vmin;
 }
-section.shuku #shukuName {
+section.shuku .shuku-name-inner {
     display: inline-block;
     position: relative;
     top: -0.25vmin;
@@ -628,7 +645,7 @@ section.quotes {
 }
 
 /* ------ MONTHLY CALLENDAR ----- */
-section.month-cal {
+section.monthlycal {
     width: 100%;
     padding: 0.3vmin 0.2vmin;
     border: 0.2vmin solid var(--ink-color);
@@ -654,7 +671,7 @@ section.month-cal {
     font-size: 1.5vmin;
 }
 
-section.month-cal .monthlycal-table {
+section.monthlycal .monthlycal-table {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     justify-items: center;
@@ -663,41 +680,41 @@ section.month-cal .monthlycal-table {
     font-size: 1.5vmin;
 }
 
-section.month-cal .day {
+section.monthlycal .day {
     width: 1.8vmin;
     text-align: center;
 }
 
-section.month-cal .holiday {
+section.monthlycal .holiday {
     outline: max(0.15vmin, 0.8px) solid var(--ink-color);
     outline-offset: -0.05vmin;
     border-radius: 50%;
 }
 
-section.month-cal .day .day-inner.digit-2 {
+section.monthlycal .day .day-inner.digit-2 {
     transform: scaleX(0.8);
 }
 
-section.month-cal .day.combined {
+section.monthlycal .day.combined {
     display: grid;
     position: relative;
     width: 100%;
     font-size: 0.9vmin;
 }
 
-section.month-cal .day.combined .upper {
+section.monthlycal .day.combined .upper {
     justify-self: left;
     height: 0.8vmin;
     overflow: visible;
 }
 
-section.month-cal .day.combined .lower {
+section.monthlycal .day.combined .lower {
     justify-self: right;
     height: 0.8vmin;
     overflow: visible;
 }
 
-section.month-cal .day.combined .sep {
+section.monthlycal .day.combined .sep {
     position: absolute;
     top: 0.15vmin;
     left: -0.3vmin;
@@ -708,7 +725,7 @@ section.month-cal .day.combined .sep {
     transform-origin: right top;
 }
 
-section.month-cal .combined .holiday {
+section.monthlycal .combined .holiday {
     outline-offset: 0.1vmin;
 }
 
@@ -912,6 +929,20 @@ svg {
     width: 5em;
     height: 3em;
     vertical-align: middle;
+}
+
+.version {
+    margin-top: max(0.5vmin, 3.75px);
+    border-top: 0.2vmin solid #0008;
+    padding-top: max(0.5vmin, 3.75px);
+
+    mix-blend-mode: multiply;
+    text-align: center;
+    font-family: source-han-serif-japanese;
+    font-weight: 700;
+    font-size: max(2vmin, 16px);
+    text-shadow: 0 0 max(0.3vmin, 2.25px) black;
+    opacity: 0.5;
 }
 
 .dw1 {

@@ -48,24 +48,55 @@ var mcont = true;
  * 日めくりカレンダーアプリ！
  */
 class DailyCal {
+    /** 設定保存キー */
     static LOCALSTORAGE_SETTINGS_KEY = "dailycal-settings";
 
-    /** @type {HolidayProvider} */
+    /**
+     * 休日管理奴
+     * @type {HolidayProvider}
+     */
     holidays = new HolidayProvider();
-    /** @type {FontLoadingManager} */
+    /**
+     * フォント読込制御奴
+     * @type {FontLoadingManager}
+     */
     fontMgr = new FontLoadingManager();
 
-    /** @type {Date} */
+    /**
+     * 日めくり進行用日付
+     * @type {Date}
+     */
     date;
-    /** @type {Page[]} */
+    /**
+     * 表示中ページ
+     * @type {Page[]}
+     */
     pages = [];
+    /**
+     * コンパネ表示カウンタ
+     */
     ctrlPanelCounter = 0;
+    /**
+     * システム日時（自動日めくり用）
+     */
+    sysDate = new Date();
 
-    /** @type {Boolean} */
+    /**
+     * 自動日めくり設定
+     * @type {Boolean}
+     */
     autoFlipping = false;
 
-    $ctrMain;
-    $ctrSub;
+    /**
+     * コンパネメイン
+     * @type {HTMLElement}
+     */
+    $ctrlMain;
+    /**
+     * コンパネ閉じる画面用
+     * @type {HTMLElement}
+     */
+    $ctrlSub;
 
     constructor() {
         this.browser = (/(msie|trident|edge|chrome|safari|firefox|opera)/
@@ -73,6 +104,9 @@ class DailyCal {
         this.isMobile = "ontouchstart" in window;
     }
 
+    /**
+     * 初期処理
+     */
     async init() {
         
         let currTime = new Date();
@@ -83,20 +117,18 @@ class DailyCal {
         if (query["date"]) {
             let [y, m, d] = query["date"].split(/[-\/\.]/);
             this.date = new Date(y, m - 1, d);
-            //@ts-ignore
-            if (this.date == "Invalid Date") {
+            if (Number.isNaN(this.date.getTime())) {
                 this.date = today;
             }
         } else {
             this.date = today;
         }
 
-        this.$ctrMain = $(".control-panel.control-main");
-        this.$ctrSub = $(".control-panel.control-sub");
+        this.$ctrlMain = $(".control-panel.control-main");
+        this.$ctrlSub = $(".control-panel.control-sub");
 
         this.loadSettings();
         this.fontMgr.init();
-        this.sysDate = new Date();
         setInterval(this.onTick.bind(this), 100);
         document.addEventListener("mousemove", this.onMouseMove.bind(this));
         $(".btn-about-app").addEventListener("click", this.onAboutAppClicked.bind(this));
@@ -119,18 +151,27 @@ class DailyCal {
         this.pages.push(this.printNewDate(this.moveNextDay()));
     }
 
+    /**
+     * 新たに日付ページを印字する
+     * @param {Date} date 
+     * @returns {DatePage}
+     */
     printNewDate(date) {
         /** @type {HTMLElement} */
         let $paper = $(".date-template").cloneNode(true);
         $paper.classList.remove("date-template");
         $(".paper-bound").prepend($paper);
 
-        let cal = new Callendar(date, this.holidays);
+        let cal = new Calendar(date, this.holidays);
         let page = new DatePage(cal, $paper, this.fontMgr);
         page.print();
         return page;
     }
 
+    /**
+     * 説明ページを印字する
+     * @returns {AboutApp}
+     */
     printAboutApp() {
         /** @type {HTMLElement} */
         let $paper = $(".about-app-template").cloneNode(true);
@@ -139,6 +180,10 @@ class DailyCal {
         return new AboutApp($paper).init();
     }
 
+    /**
+     * 設定ページを印字する
+     * @returns {Settings}
+     */
     printSettings() {
         /** @type {HTMLElement} */
         let $paper = $(".settings-template").cloneNode(true);
@@ -147,6 +192,10 @@ class DailyCal {
         return new Settings($paper, this);
     }
 
+    /**
+     * 指定日付に移動する
+     * @param {Date} date 
+     */
     async moveToDate(date) {
         this.date = date;
 
@@ -162,14 +211,19 @@ class DailyCal {
         this.pages.push(this.printNewDate(this.moveNextDay()));
     }
 
+    /**
+     * ティック処理
+     */
     onTick() {
+        // 無操作時のコンパネ隠し制御
         if (!this.isMobile && this.ctrlPanelCounter <= 50) {
             if (this.ctrlPanelCounter == 50) {
-                this.$ctrMain.classList.add("timeout");
+                this.$ctrlMain.classList.add("timeout");
             }
             this.ctrlPanelCounter++;
         }
 
+        // 自動日めくり
         let newSysDate = new Date();
 
         if (query["debug"]) {
@@ -177,14 +231,13 @@ class DailyCal {
             $(".dbg-time").textContent = `${newSysDate.toLocaleDateString()} ${newSysDate.toLocaleTimeString()}`;
         }
 
-
         if (this.autoFlipping
                 && newSysDate.getDate() != this.sysDate.getDate()
                 && Math.floor(newSysDate.getJD()) - this.getCurrDatePage().cal.date.getJD() == 1) {
             if (this.pages[0] instanceof DatePage) {
                 let page = this.getCurrDatePage();
                 this.flipPaper(page);
-                this.pages.filter(p => p !== page);
+                this.pages = this.pages.filter(p => p !== page);
             } else {
                 let nextDate = new Date(newSysDate.getFullYear(), newSysDate.getMonth(), newSysDate.getDate());
                 this.moveToDate(nextDate);
@@ -194,8 +247,8 @@ class DailyCal {
     }
 
     onMouseMove() {
-        if (this.$ctrMain.classList.contains("timeout")) {
-            this.$ctrMain.classList.remove("timeout");
+        if (this.$ctrlMain.classList.contains("timeout")) {
+            this.$ctrlMain.classList.remove("timeout");
         }
         this.ctrlPanelCounter = 0;
     }
@@ -203,16 +256,16 @@ class DailyCal {
     onAboutAppClicked() {
         if (!$(".paper-bound .paper:not(.date)")) {
             this.pages.unshift(this.printAboutApp());
-            this.$ctrMain.classList.add("hidden");
-            this.$ctrSub.classList.remove("hidden");
+            this.$ctrlMain.classList.add("hidden");
+            this.$ctrlSub.classList.remove("hidden");
         }
     }
 
     onSettingsClicked() {
         if (!$(".paper-bound .paper:not(.date)")) {
             this.pages.unshift(this.printSettings());
-            this.$ctrMain.classList.add("hidden");
-            this.$ctrSub.classList.remove("hidden");
+            this.$ctrlMain.classList.add("hidden");
+            this.$ctrlSub.classList.remove("hidden");
         }
     }
 
@@ -224,13 +277,17 @@ class DailyCal {
         this.flipPaper(this.pages.shift());
     }
 
+    /**
+     * 紙めくり
+     * @param {Page} flipped 
+     */
     flipPaper(flipped) {
         if (flipped instanceof DatePage) {
             let date = this.moveNextDay();
             this.pages.push(this.printNewDate(date));
         } else {
-            this.$ctrMain.classList.remove("hidden");
-            this.$ctrSub.classList.add("hidden");
+            this.$ctrlMain.classList.remove("hidden");
+            this.$ctrlSub.classList.add("hidden");
         }
 
         $(".paper-bound").removeChild(flipped.$page);
@@ -242,29 +299,45 @@ class DailyCal {
         })
     }
 
+    /**
+     * 明日へ
+     * @returns {Date}
+     */
     moveNextDay() {
         let newDate = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate() + 1);
         this.date = newDate;
         return newDate;
     }
 
+    /**
+     * 現在の日付ページ取得
+     * @returns {Page}
+     */
     getCurrDatePage() {
         return this.pages.filter(p => p instanceof DatePage)[0];
     }
 
+    /**
+     * スワイプ開始
+     */
     onPageSwipeStarted(e) {
         this.pageHeight = $(".paper-container").clientHeight;
         return true;
     }
 
+    /**
+     * スワイプなうの時
+     */
     onPageSwiping(e, deltaX, deltaY) {
         let $paper = this.pages[0].$page;
         if (deltaY > 0) {
+            // 紙引っ張りエフェクト
             let paddingTop = deltaY / (Math.log2(deltaY) + 2);
             $paper.style.paddingTop = paddingTop + "px";
             $paper.style.height = `${this.pageHeight + paddingTop}px`;
             $(".paper-bg", $paper).style.height = `${this.pageHeight + paddingTop}px`;
             if (deltaY > $paper.clientHeight * 0.5) {
+                // 一定距離でめくり処理に入る
                 this.onPaperFlipped();
                 return false;
             }
@@ -276,8 +349,12 @@ class DailyCal {
         return true;
     }
 
+    /**
+     * スワイプやめた時
+     */
     onPageSwiped(e, deltaX, deltaY) {
         let $page = this.pages[0].$page
+        // 引っ張った紙を戻すエフェクトを発動
         $page.style.paddingTop = "0";
         $page.style.height = this.pageHeight + "px";
         $page.classList.add("swiping-back");
@@ -287,6 +364,7 @@ class DailyCal {
         $bg.classList.add("swiping-back");
 
         let onTransitionend = e => {
+            // 片付け
             $page.classList.remove("swiping-back");
             $page.style.paddingTop = "";
             $page.style.height = "";
@@ -298,6 +376,9 @@ class DailyCal {
         $page.addEventListener("transitionend", onTransitionend);
     }
 
+    /**
+     * 設定読込
+     */
     loadSettings() {
         let json = window.localStorage.getItem(DailyCal.LOCALSTORAGE_SETTINGS_KEY);
         if (!json) {
@@ -309,6 +390,9 @@ class DailyCal {
         this.autoFlipping = savedata.autoFlipping;
     }
 
+    /**
+     * 設定保存
+     */
     saveSettings() {
         let savedata = {
             rev: 1,
@@ -331,6 +415,9 @@ class FontLoadingManager {
     isFontReady = false;
     listeners = [];
 
+    /**
+     * 初期化
+     */
     init() {
         Typekit.load({
             active: () => {
@@ -340,6 +427,10 @@ class FontLoadingManager {
         });
     }
 
+    /**
+     * 読み込み後リスナー登録
+     * @param {Function} listener 
+     */
     afterLoaded(listener) {
         if (!this.isFontReady) {
             this.listeners.push(listener);
@@ -353,10 +444,16 @@ class FontLoadingManager {
  * スワイプ操作実装のめんどいのをまとめる
  */
 class Swipe {
+    /** スワイプ開始距離閾値 */
     static THRESHOLD = 5;
 
+    /**
+     * モバイルデバイスならtrue
+     * @type {Boolean}
+     */
     isMobile;
 
+    /** タッチなうならtrue */
     touching = false;
     /** @type {number} */
     startX;
@@ -375,6 +472,7 @@ class Swipe {
     
     /**
      * @param {HTMLElement} targetElem 
+     * @param {Boolean} isMobile
      */
     constructor(targetElem, isMobile) {
         this.isMobile = isMobile;
@@ -405,6 +503,7 @@ class Swipe {
     }
 
     /**
+     * スワイプ開始
      * @param {TouchEvent|MouseEvent} e 
      */
     onTouchStart(e) {
@@ -420,10 +519,11 @@ class Swipe {
     }
 
     /**
+     * スワイプなう
      * @param {TouchEvent|MouseEvent} e 
      */
      onTouchMoving(e) {
-        if (this.isMobile && e.touches.length > 1) {
+        if (e instanceof TouchEvent && e.touches.length > 1) {
             this.onTouchEnd(e);
         }
         if (this.touching && this._onSwiping) {
@@ -439,6 +539,7 @@ class Swipe {
     }
 
     /**
+     * スワイプやめ
      * @param {TouchEvent|MouseEvent} e 
      */
     onTouchEnd(e) {
@@ -455,7 +556,7 @@ class Swipe {
      * @returns {number}
      */
     getClientX(e) {
-        return this.isMobile ? e.touches[0].clientX : e.clientX;
+        return e instanceof TouchEvent ? e.touches[0].clientX : e.clientX;
     }
 
     /**
@@ -463,7 +564,7 @@ class Swipe {
      * @returns {number}
      */
      getClientY(e) {
-        return this.isMobile ? e.touches[0].clientY : e.clientY;
+        return e instanceof TouchEvent ? e.touches[0].clientY : e.clientY;
     }
 }
 
@@ -479,11 +580,12 @@ class Swipe {
  * 気合いで生み出したりもする
  */
 class HolidayProvider {
+    /** キャッシュ保存キー */
     static LOCALSTORAGE_KEY = "dailycal-holidays";
 
     /**
      * 休日情報
-     * @type {Map.<number, HolidayEntry>}
+     * @type {Object.<number, HolidayEntry[]>}
      */
     holidays = {};
 
@@ -491,18 +593,26 @@ class HolidayProvider {
         this.load();
     }
 
+    /**
+     * 指定年の休日を取得
+     * @param {Calendar} cal 
+     * @param {*} y 
+     * @returns 
+     */
     async get(cal, y) {
         let year = y != undefined ? y : cal.getYear();
 
+        // 現行の祝日法は1948年から
         if (year >= 1948) {
             if (!this.holidays[year] || this.updateTime < new Date().getTime() - 86400000) {
+                // キャッシュにない年、キャッシュが古い場合（24時間以前）は取得しに行く
                 let list = await this.fetchHolidays(year);
                 if (list) {
-                    // Caching
+                    // キャッシュ
                     this.holidays[year] = list;
                     this.save();
                 } else {
-                    // Calculate itself in case of the year out of API range
+                    // APIから取得できないなら自分で計算するぞ
                     this.holidays[year] = this.generateHolidays(year, cal);
                 }
             }
@@ -513,6 +623,11 @@ class HolidayProvider {
         return this.holidays[year];
     }
 
+    /**
+     * APIから祝日情報を頂く
+     * @param {*} year 
+     * @returns {Promise<HolidayEntry[]|null>}
+     */
     async fetchHolidays(year) {
         let res = await fetch(`https://api.national-holidays.jp/${year}`)
         if (res.ok) {
@@ -523,6 +638,12 @@ class HolidayProvider {
         }
     }
 
+    /**
+     * 休日生成
+     * @param {*} year 
+     * @param {*} cal 
+     * @returns {HolidayEntry[]}
+     */
     generateHolidays(year, cal) {
         /** @type {Array<HolidayEntry>} */
         let holidays = Consts.DEFAULT_HOLIDAYS.map(h => {
@@ -561,6 +682,9 @@ class HolidayProvider {
         return holidays;
     }
 
+    /**
+     * キャッシュ保存
+     */
     save() {
         let savedata = {
             rev: 1,
@@ -570,6 +694,9 @@ class HolidayProvider {
         localStorage.setItem(HolidayProvider.LOCALSTORAGE_KEY, JSON.stringify(savedata));
     }
 
+    /**
+     * キャッシュ読込
+     */
     load() {
         let localJson = window.localStorage.getItem(HolidayProvider.LOCALSTORAGE_KEY);
         if (!localJson) return;
@@ -602,7 +729,7 @@ class HolidayProvider {
 /**
  * 暦計算マシーン
  */
-class Callendar {
+class Calendar {
 
     /** 基準日
      * @type {Date}
@@ -779,10 +906,21 @@ class Callendar {
         return this.lunarInfo.moon;
     }
 
+    /**
+     * 今日の休日を取得
+     * @returns {HolidayEntry[]}
+     */
     getHolidaysToday() {
         return this.getHolidays(this.date.getFullYear(), this.date.getMonth() + 1, this.date.getDate());
     }
 
+    /**
+     * 指定日付の休日を取得
+     * @param {number} y 
+     * @param {number} m 
+     * @param {number} d 
+     * @returns {Promise<HolidayEntry[]>}
+     */
     async getHolidays(y, m, d) {
         let ymd = `${y}-${pad2(m)}-${pad2(d)}`;
         let list = await this.holidays.get(this, y);
@@ -1131,7 +1269,7 @@ class DatePage extends Page {
 
     /**
      * 暦
-     * @type {Callendar}
+     * @type {Calendar}
      */
     cal;
     /** 
@@ -1142,7 +1280,7 @@ class DatePage extends Page {
 
     /**
      * コンストラクタ
-     * @param {Callendar} cal 
+     * @param {Calendar} cal 
      * @param {HTMLElement} $page 
      * @param {FontLoadingManager} fontMgr 
      */
@@ -1152,6 +1290,9 @@ class DatePage extends Page {
         this.fontMgr = fontMgr;
     }
 
+    /**
+     * 印字
+     */
     async print() {
         let wd = this.cal.getDay();
 
@@ -1170,18 +1311,28 @@ class DatePage extends Page {
         let eraYearJp = this.cal.toLocaleDateString("ja-JP-u-ca-japanese", {era: "long", year: "numeric"});
         let [, eraJp, yearJp] = eraYearJp.match(/([^\d元]+)(\d+|元)年/);
 
-        let $eraJp = this.$("#eraJp");
+        let $eraJp = this.$(".year-era-jp");
         $eraJp.textContent = eraJp;
 
-        let $yearJp = this.$("#yearJp");
+        let $yearJp = this.$(".year-num-jp");
         $yearJp.textContent = yearJp;
 
         let $yearAd = this.$("section.year-ad")
         $yearAd.textContent = yearAd + "";
 
+        let legacyEras = Consts.ERAS
+                .filter(era => era.until && era.until.getJD() < this.cal.jd)
+                .filter((era, idx) => idx < 2)
+                .map(era => `<span class="year-era-jp">${era.name}</span><span class="year-num-jp digits">${yearAd - era.since.getFullYear() + 1}</span>年`);
+
+        if (!legacyEras.length) {
+            this.$(".year-jp-separator").style.display = "none";
+        }
+        this.$("section.year-jp-legacy").innerHTML = legacyEras.join("<br>");
+
         // 月
         let month = this.cal.getMonth() + 1;
-        let $month = this.$("#month");
+        let $month = this.$(".month-num");
         $month.appendChild(this.createSvg(`svg/digit-month-${month}.svg#base`));
 
         let lastDayOfMonth = this.cal.getLastDayOfMonth().getDate();
@@ -1529,11 +1680,11 @@ class DatePage extends Page {
         });
 
         // 月カレンダー
-        let $calCurrMonth = this.$(".curr-month-cal");
+        let $calCurrMonth = this.$(".curr-monthlycal");
         this.createMonthlyCal($calCurrMonth, this.cal.getYear(), this.cal.getMonth(), false);
 
         let nextMonth = new Date(this.cal.getYear(), this.cal.getMonth() + 1, 1);
-        let $calNextMonth = this.$(".next-month-cal");
+        let $calNextMonth = this.$(".next-monthlycal");
         this.createMonthlyCal($calNextMonth, nextMonth.getFullYear(), nextMonth.getMonth(), true);
 
         this.fontMgr.afterLoaded(() => {
@@ -1549,7 +1700,7 @@ class DatePage extends Page {
     }
 
     /**
-     * 行事（新暦は改暦以降）
+     * 行事（新暦の行事は改暦以降）
      * 
      * @param {array} events 
      */
@@ -1614,10 +1765,10 @@ class DatePage extends Page {
      */
      buildLunarInfo() {
         // 旧暦日付
-        let $month = this.$("#lunarM");
+        let $month = this.$(".lunar-date-month");
         $month.innerHTML = (this.cal.isLMonthLeap() ? "閏" : "") + this.cal.getLMonth();
 
-        let $day = this.$("#lunarD");
+        let $day = this.$(".lunar-date-date");
         $day.textContent = this.cal.getLDate() + "";
 
         // 日家九星
@@ -1625,7 +1776,7 @@ class DatePage extends Page {
         $kyusei.textContent = this.cal.kyuseiInfo.kyusei;
 
         // 六曜
-        let $rokuyo = this.$("#rokuyo");
+        let $rokuyo = this.$("section.rokuyo");
         $rokuyo.textContent = this.cal.getRokuyo();
 
         // 月の朔望
@@ -1658,7 +1809,7 @@ class DatePage extends Page {
         let shukuIdx = this.cal.jd + 12;
         let shuku = Consts.SHUKU[shukuIdx % 28];
 
-        let $shukuName = this.$("#shukuName");
+        let $shukuName = this.$(".shuku-name-inner");
         $shukuName.textContent = shuku.name;
         let $shukuDesc = this.$(".shuku-desc");
         $shukuDesc.textContent = shuku.desc;
@@ -2014,6 +2165,8 @@ class SvgTag {
 
 /**
  * ゼロパ
+ * @param {number} num
+ * @returns {string}
  */
 function pad2(num) {
     return (num + "").padStart(2, "0");

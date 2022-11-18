@@ -147,6 +147,14 @@ class Consts {
         {date: "11/23", name: "勤労感謝の日"}
     ];
 
+    static ERAS = [
+        {name: "令和", since: new Date(2019, 4, 1), until: null},
+        {name: "平成", since: new Date(1989, 0, 7), until: new Date(2019, 3, 30)},
+        {name: "昭和", since: new Date(1926, 11, 25), until: new Date(1989, 0, 7)},
+        {name: "大正", since: new Date(1912, 6, 30), until: new Date(1926, 11,24)},
+        {name: "明治", since: new Date(1868, 0, 1), until: new Date(1912, 6, 29)},
+    ];
+
     static EVENTS = {
         // 記念日 referred to https://zatsuneta.com/, https://www.nnh.to/, https://dic.nicovideo.jp/
         // 末尾コメントは主に制定年が不詳の場合の設定理由
@@ -400,8 +408,9 @@ class Consts {
         5: [
             {date: "05/05", onLunarCal: false, name: "端午の節句"},
             {date: "05/05", onLunarCal: true, name: "旧端午の節句"},
-    
+
             {date: "05/01", onLunarCal: false, name: "メーデー", since: 1890},
+            {date: "05/01", onLunarCal: false, name: "令和改元の日", since: 2019},
             {date: "05/02", onLunarCal: false, name: "郵便貯金の日", since: 1950},
             {date: "05/03", onLunarCal: false, name: "リカちゃんの誕生日", since: 1968},
             {date: "05/04", onLunarCal: false, name: "ラムネの日", since: 1872},

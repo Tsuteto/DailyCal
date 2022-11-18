@@ -28,10 +28,15 @@
                     <div class="page-content loading">
                         <div class="col-right">
                             <div class="row">
-                                <section class="year-jp">
-                                    <span id="eraJp"></span><span id="yearJp" class="digits"></span>年</section>
+                                <div class="year-jp">
+                                    <section class="year-jp-present">
+                                        <span class="year-era-jp"></span><span class="year-num-jp digits"></span>年
+                                    </section>
+                                    <div class="year-jp-separator">・</div>
+                                    <section class="year-jp-legacy"></section>
+                                </div>
                                 <section class="month">
-                                    <span id="month" class="month-num"></span><span class="month-label">月</span>
+                                    <span class="month-num"></span><span class="month-label">月</span>
                                 </section>
                             </div>
                             <section class="len-of-month-mark"></section>
@@ -41,7 +46,7 @@
                                 <div class="label-choku">中段（12直）</div>
                                 <div class="choku-name"></div>
                             </section>
-                            <section class="month-cal curr-month-cal"></section>
+                            <section class="monthlycal curr-monthlycal"></section>
                         </div>
                         <div class="col-center">
                             <section class="year-ad"></section>
@@ -54,17 +59,17 @@
                             <section class="weekday-jp"></section>
                             <section class="weekday-en"></section>
                             <div class="row row-lunar-info">
-                                <section id="rokuyo" class="rokuyo"></section>
+                                <section class="rokuyo"></section>
                                 <section class="kyusei"></section>
                                 <section class="junishi"></section>
                                 <section class="jikkan"></section>
-                                <section class="lunar-date"><span class="lunar-date-mark">旧</span><span id="lunarM" class="digits"></span>月<span id="lunarD" class="digits"></span>日</section>
+                                <section class="lunar-date"><span class="lunar-date-mark">旧</span><span class="lunar-date-month digits"></span>月<span class="lunar-date-date digits"></span>日</section>
                             </div>
                             <section class="moon-age">
                                 <div class="moon-age-name"></div>
                                 <div class="moon-face"></div>
                             </section>
-                            <section class="month-cal next-month-cal"></section>
+                            <section class="monthlycal next-monthlycal"></section>
                         </div>
                         <div class="bottom">
                             <section class="nanajunikou">
@@ -74,7 +79,7 @@
                             </section>
                             <section class="shuku">
                                 <div class="shuku-label">二十八宿</div>
-                                <div class="shuku-name"><span id="shukuName"></span></div>
+                                <div class="shuku-name"><span class="shuku-name-inner"></span></div>
                                 <div class="shuku-desc"></div>
                             </section>
                         </div>
@@ -163,7 +168,7 @@
                         </section>
                         <section class="about-app-page">
                             <h2>謝辞</h2>
-                            <p>旧暦、雑暦、七十二候、月太陽の黄経差等の算出のために使用しております。</p>
+                            <p>旧暦、雑節、七十二候、月太陽の黄経差等の算出のために使用しております。</p>
                             <ul>
                                 <li>qreki.js: 旧暦計算サンプルプログラム rev. 1.1 - H.Takano (C)1993,1994 / Nagano Yutaka (C)1999<br>
                                 <a href="http://www.vector.co.jp/soft/dos/personal/se016093.html" target="_blank">AWKオリジナル版</a></li>
@@ -187,6 +192,10 @@
                         <section class="about-app-page">
                             <h2>更新履歴</h2>
                             <dl>
+                                <dt>Ver. 1.1.0 - 2022/11/19</dt>
+                                <dd>前元号からの通算年表示を追加<br>
+                                    自動日めくりで紙がめくれた後に手動でめくれなくなる不具合修正<br>
+                                    コードのコメント増やし、スペルミス修正など</dd>
                                 <dt>Ver. 1.0.2 - 2022/11/12</dt>
                                 <dd>手動でめくれる説明を分かりやすく<br>
                                     記念日いくつか追加および修正</dd>
@@ -244,6 +253,7 @@
                 <svg><use xlink:href="svg/gear.svg#main"></use></svg><br>
                 設定
             </button>
+            <div class="version">Ver. 1.1.0</div>
         </div>
         <div class="control-panel control-sub hidden">
             <button class="btn btn-close">
