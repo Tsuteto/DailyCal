@@ -1,0 +1,30 @@
+{
+  "name": "dailycal",
+  "version": "1.1.0",
+  "description": "Japanese style page-a-day calendar",
+  "main": "js-dist/app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development",
+    "watch": "webpack --mode development --watch",
+    "sass-ver": "sass --version"
+  },
+  "author": "Tsuteto",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.7",
+    "@babel/plugin-transform-strict-mode": "^7.18.6",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.0",
+    "css-loader": "^6.7.3",
+    "mini-css-extract-plugin": "^2.7.2",
+    "sass": "^1.57.1",
+    "sass-loader": "^13.2.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}

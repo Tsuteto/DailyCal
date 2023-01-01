@@ -1,4 +1,4 @@
-class Consts {
+export class Consts {
     static WEEKDAYS_JP = ["日", "月", "火", "水", "木", "金", "土"];
     static WEEKDAYS_EN = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     static SEKKI = ["春分", "清明", "穀雨", "立夏", "小満", "芒種", "夏至", "小暑", "大暑", "立秋", "処暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至", "小寒", "大寒", "立春", "雨水", "啓蟄"];
@@ -151,7 +151,7 @@ class Consts {
         {name: "令和", since: new Date(2019, 4, 1), until: null},
         {name: "平成", since: new Date(1989, 0, 7), until: new Date(2019, 3, 30)},
         {name: "昭和", since: new Date(1926, 11, 25), until: new Date(1989, 0, 7)},
-        {name: "大正", since: new Date(1912, 6, 30), until: new Date(1926, 11,24)},
+        {name: "大正", since: new Date(1912, 6, 30), until: new Date(1926, 11, 24)},
         {name: "明治", since: new Date(1868, 0, 1), until: new Date(1912, 6, 29)},
     ];
 
@@ -724,7 +724,10 @@ class Consts {
     
         ],
         10: [
+            {date: "10/10", onLunarCal: true, name: "とおかんや"},
             {date: "10/15", onLunarCal: true, name: "下元"},
+            {date: "10/20", onLunarCal: true, name: "旧えびす講"},
+            {date: "10/20", onLunarCal: true, name: "旧誓文払い"},
 
             {date: "10/01", onLunarCal: false, name: "法の日", since: 1960},
             {date: "10/01", onLunarCal: false, name: "日本酒の日", since: 1978},
@@ -778,6 +781,7 @@ class Consts {
             {date: "10/19", onLunarCal: false, name: "世界旅行の日", since: 1964}, // 海外旅行自由化の年
             {date: "10/19", onLunarCal: false, name: "ＴＯＥＩＣの日", since: 2021},
             {date: "10/20", onLunarCal: false, name: "えびす講", since: null},
+            {date: "10/20", onLunarCal: false, name: "誓文払い", since: null},
             {date: "10/20", onLunarCal: false, name: "リサイクルの日", since: 1990},
             {date: "10/20", onLunarCal: false, name: "シチューライスの日", since: 2019},
             {date: "10/21", onLunarCal: false, name: "国際反戦デー", since: 1966},

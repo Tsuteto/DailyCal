@@ -1,6 +1,9 @@
 //-@ts-check
 /// <reference path="consts.js" />
-/// <reference path="lib/qreki.js" />
+/// <reference path="../lib/qreki.js" />
+import './main.scss';
+import {Consts} from "./consts.js";
+import {kyureki, calc_chu, calc_saku, LONGITUDE_SUN, LONGITUDE_MOON, rm_sun0} from "../lib/qreki.js";
 
 (function(d) {
     var config = {
@@ -11,6 +14,9 @@
     h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
 })(document);
 
+/**
+ * クエリパラメータ
+ */
 var query = (function() {
     let querystr = window.location.search;
     let query = {};
@@ -37,12 +43,6 @@ var $ = (param, $parent = document) => {
         return $parent.querySelector(param);
     }
 };
-
-/** 
- * qreki.jsで使用されるグローバル変数。。
- * @type {boolean}
- */
-var mcont = true;
 
 /**
  * 日めくりカレンダーアプリ！
@@ -97,18 +97,23 @@ class DailyCal {
      * @type {HTMLElement}
      */
     $ctrlSub;
+    /**
+     * 使用ブラウザ
+     */
+    browser = (/(msie|trident|edge|chrome|safari|firefox|opera)/
+            .exec(window.navigator.userAgent.toLowerCase()) || ["other"]).pop().replace("trident", "msie");
+    /**
+     * モバイルデバイス判定
+     */
+    isMobile = "ontouchstart" in window;
 
     constructor() {
-        this.browser = (/(msie|trident|edge|chrome|safari|firefox|opera)/
-                .exec(window.navigator.userAgent.toLowerCase()) || ["other"]).pop().replace("trident", "msie");
-        this.isMobile = "ontouchstart" in window;
     }
 
     /**
      * 初期処理
      */
     async init() {
-        
         let currTime = new Date();
         let today = new Date(currTime.getFullYear(), currTime.getMonth(), currTime.getDate());
 
@@ -117,7 +122,7 @@ class DailyCal {
         if (query["date"]) {
             let [y, m, d] = query["date"].split(/[-\/\.]/);
             this.date = new Date(y, m - 1, d);
-            if (Number.isNaN(this.date.getTime())) {
+            if (!this.validateDate(this.date)) {
                 this.date = today;
             }
         } else {
@@ -149,6 +154,17 @@ class DailyCal {
         
         this.pages.push(this.printNewDate(this.date));
         this.pages.push(this.printNewDate(this.moveNextDay()));
+    }
+
+    validateDate(date) {
+        if (date.getTime() < new Date(1868, 0, 1).getTime()) {
+            alert("1868年1月1日（明治元年）より前の日付には対応していません。\n今日の日付を表示します。");
+            return false;
+        }
+        if (Number.isNaN(date.getTime())) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -1158,7 +1174,12 @@ class Calendar {
      * @returns {number | null}
      */
     get24SekkiIdx() {
-        if (this.jd == Math.floor(calc_chu(this.jd + 1, 15))) {
+        let raw = calc_chu(this.jd + 1, 15);
+        let rawDt = new Date();
+        rawDt.setJD(raw);
+        console.debug(`節気: ${rawDt}`);
+
+        if (this.jd == Math.floor(raw)) {
             return (rm_sun0 / 15) % 24;
         } else {
             return null;
@@ -1294,6 +1315,7 @@ class DatePage extends Page {
      * 印字
      */
     async print() {
+        try {
         let wd = this.cal.getDay();
 
         if (wd == 0) {
@@ -1308,8 +1330,15 @@ class DatePage extends Page {
 
         // 年
         let yearAd = this.cal.getYear();
-        let eraYearJp = this.cal.toLocaleDateString("ja-JP-u-ca-japanese", {era: "long", year: "numeric"});
-        let [, eraJp, yearJp] = eraYearJp.match(/([^\d元]+)(\d+|元)年/);
+        let eraJpInfo = Consts.ERAS
+                .filter(era => era.since.getJD() <= this.cal.jd)
+                .filter(era => !era.until || era.until.getJD() >= this.cal.jd)[0];
+
+        let eraJp = eraJpInfo.name;
+        let yearJp = this.cal.getYear() - eraJpInfo.since.getFullYear() + 1;
+        if (yearJp == 1) {
+            yearJp = "元";
+        }
 
         let $eraJp = this.$(".year-era-jp");
         $eraJp.textContent = eraJp;
@@ -1435,6 +1464,24 @@ class DatePage extends Page {
             events.push("土用");
         }
 
+        // 亥の子餅・炉開き
+        if (this.cal.jd == this.cal.getEtoDayAfter(new Date(this.cal.getYear(), 9, 1).getJD(), 11)) {
+            events.push("亥の子餅");
+            events.push("炉開き");
+        }
+
+        // 旧亥の子餅・旧炉開き
+        if (this.cal.getLMonth() == 10 && !this.cal.isLMonthLeap()) {
+            let octFirstLunar = this.cal.lunarInfo.month_saku.filter(s => s.month == 10 && !s.uruu);
+            if (octFirstLunar) {
+                let firstIOnOctLunar = this.cal.getEtoDayAfter(octFirstLunar[0].jd, 11);
+                if (this.cal.jd == firstIOnOctLunar) {
+                    events.push("旧亥の子餅");
+                    events.push("旧炉開き");
+                }
+            }
+        }
+
         // 土用明け
         // if (this.cal.shiritsu[0] - this.cal.jd == 1) {
         //     events.push("土用明け");
@@ -1556,6 +1603,21 @@ class DatePage extends Page {
             }
             if (this.cal.jd == firstUmaOnFeb + 24) {
                 events.push("三の午");
+            }
+        }
+
+        // 11月の酉　一の酉・二の酉・三の酉
+        if (this.cal.getMonth() == 10) {
+            let novFirst = new Date(this.cal.getYear(), 10, 1).getJD();
+            let firstToriOnNov = this.cal.getEtoDayAfter(novFirst, 9);
+            if (this.cal.jd == firstToriOnNov) {
+                events.push("一の酉");
+            }
+            if (this.cal.jd == firstToriOnNov + 12) {
+                events.push("二の酉");
+            }
+            if (this.cal.jd == firstToriOnNov + 24) {
+                events.push("三の酉");
             }
         }
 
@@ -1697,6 +1759,9 @@ class DatePage extends Page {
             this.$(".page-content")
                     .classList.remove("loading");
         });
+    } catch (error) {
+        alert(error.message + "\n" + error.stack.toString());
+    }
     }
 
     /**
@@ -2078,7 +2143,12 @@ class Settings extends Page {
         let newDate = new Date(y, m - 1, d);
 
         this.app.onPaperFlipped();
-        this.app.moveToDate(newDate);
+
+        if (this.app.validateDate(newDate)) {
+            this.app.moveToDate(newDate);
+        } else {
+            this.app.moveToDate(this.app.today);
+        }
     }
 }
 

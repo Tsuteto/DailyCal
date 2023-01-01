@@ -33,7 +33,7 @@ body {
     user-select: none;
     outline: none;
 
-    background-image: url(./img/wood2.jpg);
+    background-image: url(../img/wood2.jpg);
     background-attachment: fixed;
     background-size: cover;
 
@@ -50,7 +50,7 @@ body {
     width: 100%;
     top: 0px;
 
-    background-image: url(./img/wood2.jpg);
+    background-image: url(../img/wood2.jpg);
     background-attachment: fixed;
     z-index: -1;
     pointer-events: none;
@@ -145,7 +145,7 @@ main {
     width: 100%;
     height: 100%;
     background-color: var(--bg-color);
-    background: url(img/paper2.png);
+    background: url(../img/paper2.png);
     box-shadow: 0 0 25vmin rgb(255, 233, 215) inset;
 }
 
@@ -644,7 +644,7 @@ section.quotes {
     font-size: 2vmin;
 }
 
-/* ------ MONTHLY CALLENDAR ----- */
+/* ------ MONTHLY CALENDAR ----- */
 section.monthlycal {
     width: 100%;
     padding: 0.3vmin 0.2vmin;
@@ -913,7 +913,7 @@ article.settings .set-date .ymd-fields {
 /* ------ ETC ------ */
 .digits {
     text-combine-upright: all;
-    vertical-align: 5%;
+    vertical-align: 10%;
 }
 
 svg {
