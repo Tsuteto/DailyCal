@@ -2,9 +2,17 @@
 <html>
 <head>
     <title>日めくりカレンダー</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="dist/main.css"/>
     <script src="dist/app.js"></script>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="日めくりカレンダー"/>
+    <meta property="og:description" content="クラシックで和風な日めくりカレンダーです。インテリアとしてデスクトップに飾ってみてはいかがでしょうか。"/>
+    <meta property="og:url" content="https://tsuteto.github.io/DailyCal/index.html"/>
+    <meta property="og:image" content="https://tsuteto.github.io/DailyCal/img/sample.png"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@tsuteto"/>
 </head>
 <body>
     <div class="bg-desktop"></div>
@@ -190,6 +198,9 @@
                         <section class="about-app-page">
                             <h2>更新履歴</h2>
                             <dl>
+                                <dt>Ver. 1.2.1 - 2023/2/11</dt>
+                                <dd>日が二桁の場合の「1」で土日が祝日の時に付く縁取りが太すぎるのを修正<br>
+                                    Twitterカード対応</dd>
                                 <dt>Ver. 1.2.0 - 2023/1/1</dt>
                                 <dd>Babel導入で古いブラウザ対応（同時にWebpackとSASSも導入して環境を整えた）<br>
                                     Androidブラウザで動かない不具合修正（秘技ja-jp-u-ca-japaneseで元号が取得できない😫）<br>
@@ -255,7 +266,7 @@
                 <svg><use xlink:href="svg/gear.svg#main"></use></svg><br>
                 設定
             </button>
-            <div class="version">Ver. 1.2.0</div>
+            <div class="version">Ver. 1.2.1</div>
         </div>
         <div class="control-panel control-sub hidden">
             <button class="btn btn-close">
