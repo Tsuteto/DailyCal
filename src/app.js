@@ -1734,9 +1734,19 @@ class DatePage extends Page {
         let $events = this.$(".events");
         events.forEach(val => {
             let $div = $("<div>");
-            $div.innerHTML = val;
-            if (val.indexOf("<wbr>") > -1) {
-                $div.classList.add("long-name");
+            if (/<w?br>/.test(val)) {
+                val.split(/<w?br>/).forEach(l => {
+                    let $l = $("<div>");
+                    $l.textContent = l;
+                    $div.appendChild($l);
+                });
+                if (val.indexOf("<wbr>") > -1) {
+                    $div.classList.add("event-long-name");
+                } else {
+                    $div.classList.add("event-multi-line");
+                }
+            } else {
+                $div.innerHTML = val;
             }
             $events.appendChild($div);
         });
@@ -1751,7 +1761,7 @@ class DatePage extends Page {
 
         this.fontMgr.afterLoaded(() => {
             // フォント読み込み後に文字の潰し制御を行う
-            this.$page.querySelectorAll(".events div")
+            this.$page.querySelectorAll(".events > div:not(.event-multi-line), .events div.event-multi-line > div")
                     .forEach($e => this.adjustElementsV($e, this.$(".events")));
             this.adjustElementsH(this.$(".events"));
 

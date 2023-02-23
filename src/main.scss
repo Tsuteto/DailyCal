@@ -343,9 +343,32 @@ section.events div .digit-2 {
     text-combine-upright: all;
     padding-top: 0.6vmin;
 }
-section.events div.long-name {
+
+section.events div.event-long-name {
+    line-height: 1;
+}
+section.events div.event-long-name :first-child {
     text-align: left;
+    text-align-last: left;
+    padding-bottom: 1.5em;
+}
+section.events div.event-long-name :nth-child(2) {
+    text-align: right;
     text-align-last: right;
+    padding-top: 1.5em;
+}
+section.events div.event-multi-line {
+    height: 22vmin;
+    line-height: 1;
+}
+
+section.events div.event-multi-line :first-child {
+    text-align: justify;
+    text-align-last: justify;
+}
+section.events div.event-multi-line :nth-child(2) {
+    text-indent: 1.5em;
+    text-align: right;
 }
 
 section.choku {
@@ -384,9 +407,12 @@ section.year-ad {
     letter-spacing: 0.5vmin;
 }
 .day-frame {
+    display: grid;
     position: relative;
-    align-self: center;
+    align-self: stretch;
     justify-self: stretch;
+    align-items: center;
+    justify-items: center;
     text-align: center;
 }
 
@@ -443,10 +469,15 @@ section.day svg {
 }
 .paper.holiday section.day.digit-2 svg {
     width: calc(var(--size) * var(--ratio) * 0.96);
-    height: calc(var(--size) * 0.9);
-    transform: scaleY(calc(1 / 0.9));
+    transform: scaleY(calc(1 / 0.96));
 }
 
+.paper.saturday.holiday, .paper.sunday.holiday {
+     section.day.digit-2 svg {
+        height: calc(var(--size) * 0.9);
+        transform: scaleY(calc(1 / 0.9));
+    }
+}
 
 /* ----- LEFT ----- */
 
