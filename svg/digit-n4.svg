@@ -7,32 +7,32 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="digit-n4.svg"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-   id="base"
+   viewBox="0 0 2.2187757 4.7810211"
    version="1.1"
-   viewBox="0 0 2.2187757 4.7810211">
+   id="base"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="digit-n4.svg">
   <defs
      id="defs183" />
   <sodipodi:namedview
-     inkscape:window-maximized="0"
-     inkscape:window-y="24"
-     inkscape:window-x="24"
-     inkscape:window-height="1198"
-     inkscape:window-width="1638"
-     showgrid="false"
-     inkscape:document-rotation="0"
-     inkscape:current-layer="layer1"
-     inkscape:document-units="mm"
-     inkscape:cy="3.2215416"
-     inkscape:cx="0.92549347"
-     inkscape:zoom="256"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
+     id="namedview7691"
      pagecolor="#ffffff"
-     id="namedview7691" />
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="181.01934"
+     inkscape:cx="0.34674922"
+     inkscape:cy="2.2119732"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1638"
+     inkscape:window-height="1198"
+     inkscape:window-x="24"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata186">
     <rdf:RDF>
@@ -46,16 +46,16 @@
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
+     inkscape:label="レイヤー 1"
      inkscape:groupmode="layer"
-     inkscape:label="レイヤー 1">
+     id="layer1">
     <g
-       transform="matrix(0.26458333,0,0,0.26810384,-14.834616,-10.050502)"
-       id="n4">
+       id="n4"
+       transform="matrix(0.26458333,0,0,0.26810384,-14.834616,-10.050502)">
       <path
-         sodipodi:nodetypes="ccccsccccscssccsszscccccccc"
+         d="m 61.146609,37.560793 h 1.588773 l -1.22e-4,10.192911 h 0.702315 c 0.427728,0 0.559833,-0.550031 0.643946,-0.70222 0.06862,-0.124163 0.187588,-0.11043 0.187588,-0.11043 l 0.184533,0.0024 -0.316244,3.962298 h -1.402016 v 1.050065 c 0,0.338998 0.168504,0.595313 0.309551,0.768946 0.147178,0.165364 0.314983,0.248047 0.65117,0.248047 0,0 0.517054,0.01252 0.517054,0.455429 v 1.756322 H 58.48242 v -1.754074 c 0,-0.457915 0.545785,-0.457677 0.545785,-0.457677 0.326227,-4e-4 0.535776,-0.04841 0.745088,-0.248828 0.209312,-0.200418 0.34442,-0.418856 0.34442,-0.768359 v -1.049871 h -4.049654 l -1.09e-4,-2.8685 c -9e-6,-0.309932 0.166406,-0.655383 0.166406,-0.655383 l 4.43927,-9.456272 c 0,0 0.133416,-0.364804 0.472983,-0.364804 z m -1.028896,4.233727 -2.754809,5.959184 h 2.754686 z"
          id="path843-7"
-         d="m 60.83657,37.560793 h 1.898812 l -1.22e-4,10.192911 h 0.702315 c 0.427728,0 0.633652,-0.550031 0.717765,-0.70222 0.06862,-0.124163 0.187588,-0.11043 0.187588,-0.11043 l 0.110714,0.0024 -0.316244,3.962298 h -1.402016 v 1.050065 c 0,0.338998 0.168504,0.595313 0.309551,0.768946 0.147178,0.165364 0.314983,0.248047 0.65117,0.248047 0,0 0.517054,0.01252 0.517054,0.455429 v 1.756322 H 58.48242 v -1.754074 c 0,-0.457915 0.545785,-0.457677 0.545785,-0.457677 0.326227,-4e-4 0.535776,-0.04841 0.745088,-0.248828 0.209312,-0.200418 0.34442,-0.418856 0.34442,-0.768359 v -1.049871 h -4.049654 l -1.22e-4,-3.462069 z m -0.718857,4.357357 -2.823997,5.835554 h 2.823874 z" />
+         sodipodi:nodetypes="ccccsccccscssccsszscccccccccc" />
     </g>
   </g>
 </svg>
