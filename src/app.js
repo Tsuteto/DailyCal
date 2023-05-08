@@ -1410,6 +1410,24 @@ class DatePage extends Page {
         let $choku = this.$(".choku-name");
         $choku.textContent = this.cal.calcJunichoku();
 
+        // 二十四節気
+        let sekkiIdx = this.cal.get24SekkiIdx();
+        if (sekkiIdx != null) {
+            let $sekki = $("<section>");
+            $sekki.className = "nijushisekki";
+            let $sekkiLabel = $("<div>");
+            $sekkiLabel.className = "nijushisekki-label";
+            $sekkiLabel.innerHTML = "二十四<br>節気";
+            let $sekkiName = $("<div>");
+            $sekkiName.className = "nijushisekki-name";
+            let sekki = Consts.SEKKI[sekkiIdx];
+            $sekkiName.innerHTML = `<ruby>${sekki.name}<rt>${sekki.ruby}</rt></ruby>`;
+
+            $sekki.append($sekkiLabel);
+            $sekki.append($sekkiName);
+            this.$(".bottom-row").prepend($sekki);
+        }
+
         // 七十二候
         let $kouName = this.$(".nanajunikou-name");
         let $kouDesc = this.$(".nanajunikou-desc");
@@ -1428,10 +1446,9 @@ class DatePage extends Page {
             this.$("section.holiday-name").textContent = holiday[0].name;
         }
 
-        // 二十四節気
-        let sekkiIdx = this.cal.get24SekkiIdx();
+        // 二十四節気(行事欄)
         if (sekkiIdx != null) {
-            events.push(Consts.SEKKI[sekkiIdx]);
+            events.push(Consts.SEKKI[sekkiIdx].name);
         }
 
         // 節分

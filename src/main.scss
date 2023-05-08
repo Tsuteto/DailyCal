@@ -586,11 +586,52 @@ section.moon-age .moon-face svg {
     height: 9vmin;
 }
 /* ------ BOTTOM ------ */
+div.bottom-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 1vmin;
+}
+
+section.nijushisekki {
+    display: grid;
+    grid-area: sekki;
+    width: fit-content;
+    grid-template-areas: "label name";
+    grid-template-columns: auto auto;
+    gap: 1vmin;
+    align-items: center;
+}
+
+section.nijushisekki .nijushisekki-label {
+    grid-area: label;
+    padding-right: 1vmin;
+    border-right: 0.15vmin solid var(--ink-color);
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-align: center;
+    height: 4em;
+
+    font-family: source-han-serif-japanese;
+    font-weight: 700;
+    font-size: 1.5vmin;
+    font-feature-settings: "vpal" 1;
+    line-height: 1.2;
+}
+
+section.nijushisekki .nijushisekki-name {
+    grid-area: name;
+    font-family: source-han-serif-japanese;
+    font-weight: 700;
+    font-size: 2.5vmin;
+    font-feature-settings: "palt" 1;
+}
 
 section.nanajunikou {
     display: grid;
+    grid-area: kou;
     width: fit-content;
-    margin: 0 auto 1vmin auto;
     grid-template-areas: "label name desc";
     grid-template-columns: auto 1fr;
     gap: 1vmin;
@@ -630,6 +671,7 @@ section.nanajunikou .nanajunikou-desc {
 
 section.shuku {
     display: grid;
+    grid-area: shuku;
     width: fit-content;
     margin: 0 auto 0 auto;
     grid-template-areas: "label value desc";

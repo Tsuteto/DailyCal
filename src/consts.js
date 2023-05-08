@@ -1,7 +1,32 @@
 export class Consts {
     static WEEKDAYS_JP = ["日", "月", "火", "水", "木", "金", "土"];
     static WEEKDAYS_EN = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-    static SEKKI = ["春分", "清明", "穀雨", "立夏", "小満", "芒種", "夏至", "小暑", "大暑", "立秋", "処暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至", "小寒", "大寒", "立春", "雨水", "啓蟄"];
+    static SEKKI = [
+        {name: "春分", ruby: "しゅんぶん"},
+        {name: "清明", ruby: "せいめい"},
+        {name: "穀雨", ruby: "こくう"},
+        {name: "立夏", ruby: "りっか"},
+        {name: "小満", ruby: "しょうまん"},
+        {name: "芒種", ruby: "ぼうしゅ"},
+        {name: "夏至", ruby: "げし"},
+        {name: "小暑", ruby: "しょうしょ"},
+        {name: "大暑", ruby: "たいしょ"},
+        {name: "立秋", ruby: "りっしゅう"},
+        {name: "処暑", ruby: "しょしょ"},
+        {name: "白露", ruby: "はくろ"},
+        {name: "秋分", ruby: "しゅうぶん"},
+        {name: "寒露", ruby: "かんろ"},
+        {name: "霜降", ruby: "そうこう"},
+        {name: "立冬", ruby: "りっとう"},
+        {name: "小雪", ruby: "しょうせつ"},
+        {name: "大雪", ruby: "たいせつ"},
+        {name: "冬至", ruby: "とうじ"},
+        {name: "小寒", ruby: "しょうかん"},
+        {name: "大寒", ruby: "だいかん"},
+        {name: "立春", ruby: "りっしゅん"},
+        {name: "雨水", ruby: "うすい"},
+        {name: "啓蟄", ruby: "けいちつ"}
+    ];
     static JUNICHOKU = ["たつ", "のぞく", "みつ", "たいら", "さだん", "とる", "やぶる", "あやぶ", "なる", "おさん", "ひらく", "とづ"];
     static JUNISHI = ["ね", "うし", "とら", "う", "たつ", "み", "うま", "ひつじ", "さる", "とり", "いぬ", "い"];
     static JIKKAN = ["きのえ", "きのと", "ひのえ", "ひのと", "つちのえ", "つちのと", "かのえ", "かのと", "みずのえ", "みずのと"];
@@ -359,14 +384,18 @@ export class Consts {
             {date: "04/01", onLunarCal: false, name: "エイプリルフール", since: 1912}, // エイプリルフールの名称は大正時代から
             {date: "04/01", onLunarCal: false, name: "アップル創業", since: 1976, anniv: true},
             {date: "04/02", onLunarCal: false, name: "こどもの本の日", since: 1967},
+            {date: "04/02", onLunarCal: false, name: "歯列矯正の日", since: 2001},
             {date: "04/03", onLunarCal: false, name: "いんげん豆の日", since: 1673},
             {date: "04/03", onLunarCal: false, name: "シーサーの日", since: 2002},
             {date: "04/04", onLunarCal: false, name: "あんぱんの日", since: 2001},
             {date: "04/04", onLunarCal: false, name: "おかまの日", since: 1980}, // オカマが女性的な男性を指すようになったのが1980年代
             {date: "04/05", onLunarCal: false, name: "横丁の日", since: 2018},
+            {date: "04/05", onLunarCal: false, name: "小笠原返還記念日", since: 1968},
             {date: "04/06", onLunarCal: false, name: "北極の日", since: 1909},
+            {date: "04/06", onLunarCal: false, name: "城の日", since: 1990},
             {date: "04/06", onLunarCal: false, name: "コンビーフの日", since: 1950}, // 日本初の缶詰コンビーフ発売年
             {date: "04/07", onLunarCal: false, name: "世界保健デー", since: 1948},
+            {date: "04/07", onLunarCal: false, name: "鉄腕アトム誕生日", since: 2003},
             {date: "04/08", onLunarCal: false, name: "花祭り（潅仏会）", since: null},
             {date: "04/09", onLunarCal: false, name: "大仏開眼の日", since: 752},
             {date: "04/09", onLunarCal: false, name: "鍼灸の日", since: 2017},
@@ -515,7 +544,6 @@ export class Consts {
             {date: "06/25", onLunarCal: false, name: "サザンの日", since: 1978},
             {date: "06/25", onLunarCal: false, name: "百合の日", since: 2019},
             {date: "06/25", onLunarCal: false, name: "住宅デー", since: 1978},
-            {date: "06/26", onLunarCal: false, name: "ＧＵＭＩ記念日", since: 2009},
             {date: "06/26", onLunarCal: false, name: "露天風呂の日", since: 1987},
             {date: "06/27", onLunarCal: false, name: "ちらし寿司の日", since: 2011},
             {date: "06/27", onLunarCal: false, name: "演説の日", since: 1874},
@@ -691,7 +719,7 @@ export class Consts {
             {date: "09/12", onLunarCal: false, name: "マラソンの日", since: 1896}, // 最初のオリンピック開催年
             {date: "09/13", onLunarCal: false, name: "世界法の日", since: 1965},
             {date: "09/13", onLunarCal: false, name: "北斗の拳の日", since: 2018},
-            {date: "09/13", onLunarCal: false, name: "スーパーマリオ", since: 1985},
+            {date: "09/13", onLunarCal: false, name: "スーパーマリオ", since: 1985, anniv: true},
             {date: "09/14", onLunarCal: false, name: "コスモスの日", since: 1980}, // バレンタインデーが定着した頃
             {date: "09/14", onLunarCal: false, name: "ゲームキューブ", since: 2001, anniv: true},
             {date: "09/15", onLunarCal: false, name: "老人の日", since: 2003},
@@ -758,18 +786,17 @@ export class Consts {
             {date: "10/07", onLunarCal: false, name: "ミステリー記念日", since: 1963}, // ポオ全集刊行年
             {date: "10/07", onLunarCal: false, name: "バーコードの日", since: 1952}, // 特許取得年
             {date: "10/w1-0", onLunarCal: false, name: "シャツの日", since: 1979},
+            {date: "10/w1-0", onLunarCal: false, name: "デジタルの日", since: 2022},
             {date: "10/08", onLunarCal: false, name: "木の日", since: 1977},
             {date: "10/08", onLunarCal: false, name: "焼きおにぎりの日", since: 2015},
             {date: "10/09", onLunarCal: false, name: "世界郵便デー", since: 1984},
             {date: "10/09", onLunarCal: false, name: "トラックの日", since: 1992},
             {date: "10/09", onLunarCal: false, name: "トクホの日", since: 2010},
-            {date: "10/10", onLunarCal: false, name: "デジタルの日", since: 2015},
             {date: "10/10", onLunarCal: false, name: "萌の日", since: 2015},
             {date: "10/10", onLunarCal: false, name: "お好み焼きの日", since: 2006},
             {date: "10/10", onLunarCal: false, name: "目の愛護デー", since: 1947},
             {date: "10/10", onLunarCal: false, name: "銭湯の日", since: 1991},
             {date: "10/10", onLunarCal: false, name: "ちくわぶの日", since: 2018},
-            {date: "10/11", onLunarCal: false, name: "デジタルの日", since: 2015},
             {date: "10/11", onLunarCal: false, name: "ウィンクの日", since: 2000}, // ググった感じ2000年以降
             {date: "10/12", onLunarCal: false, name: "豆乳の日", since: 2008},
             {date: "10/12", onLunarCal: false, name: "コロンブス・デー", since: 1866},

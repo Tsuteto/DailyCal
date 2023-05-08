@@ -11,7 +11,7 @@
     <meta property="og:description" content="クラシックで和風な日めくりカレンダーです。インテリアとしてデスクトップに飾ってみてはいかがでしょうか。"/>
     <meta property="og:url" content="https://tsuteto.github.io/DailyCal/index.html"/>
     <meta property="og:image" content="https://tsuteto.github.io/DailyCal/img/sample.png"/>
-    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:site" content="@tsuteto"/>
 </head>
 <body>
@@ -78,11 +78,13 @@
                             <section class="monthlycal next-monthlycal"></section>
                         </div>
                         <div class="bottom">
-                            <section class="nanajunikou">
-                                <div class="nanajunikou-label">七十二候</div>
-                                <div class="nanajunikou-name"></div>
-                                <div class="nanajunikou-desc"></div>
-                            </section>
+                            <div class="bottom-row">
+                                    <section class="nanajunikou">
+                                    <div class="nanajunikou-label">七十二候</div>
+                                    <div class="nanajunikou-name"></div>
+                                    <div class="nanajunikou-desc"></div>
+                                </section>
+                            </div>
                             <section class="shuku">
                                 <div class="shuku-label">二十八宿</div>
                                 <div class="shuku-name"><span class="shuku-name-inner"></span></div>
@@ -119,14 +121,14 @@
                                         旧暦では２９日と３０日が不規則に変わっていた名残です。</p>
                                     <h3>②行事</h3>
                                     <p>日々の記念日に加え、次のものが含まれます。<br>
-                                        ・二十四節気　・満月　・プレミアムフライデー<br>
-                                        ・彼岸　・社日　・土用　・入梅　・半夏生<br>……など<br>
+                                        ・<ruby>二十四節気<rt>にじゅうしせっき</rt></ruby>　・満月　・プレミアムフライデー<br>
+                                        ・<ruby>彼岸<rt>ひがん</rt></ruby>　・<ruby>社日<rt>しゃにち</rt></ruby>　・<ruby>土用<rt>どよう</rt></ruby>　・<ruby>入梅<rt>にゅうばい</rt></ruby>　・<ruby>半夏生<rt>はんげしょう</rt></ruby><br>……など<br>
                                         記念日は開始年が設定されており、過去に遡ると表示されない場合があります。改暦以前は非対応です。</p>
-                                    <h3>③選日</h3>
+                                    <h3>③<ruby>選日<rt>せんじつ</rt></ruby></h3>
                                     <p>江戸時代に用いられた行動の吉凶を占うもので、次のものが含まれます。<br>
-                                        一粒万倍日、不成就日、天赦日、八専、天一天上、十方暮、犯土（大づち・小づち）、三隣亡、臘日、三伏日（初伏・中伏・末伏）</p>
+                                        <ruby>一粒万倍日<rt>いちりゅうまんばいび</rt></ruby>、<ruby>不成就日<rt>ふじょうじゅび</rt></ruby>、<ruby>天赦日<rt>てんしゃにち</rt></ruby>、<ruby>八専<rt>はっせん</rt></ruby>、<ruby>天一天上<rt>てんいちてんじょう</rt></ruby>、<ruby>十方暮<rt>じっぽうぐれ</rt></ruby>、<ruby>犯土<rt>ぼんど</rt></ruby>（大づち・小づち）、<ruby>三隣亡<rt>さんりんぼう</rt></ruby>、<ruby>臘日<rt>ろうじつ</rt></ruby>、<ruby>三伏<rt>さんぷく</rt></ruby>（<ruby>初伏<rt>しょふく</rt></ruby>・<ruby>中伏<rt>ちゅうふく</rt></ruby>・<ruby>末伏<rt>まっぷく</rt></ruby>）</p>
                                     <h3>④中段（１２直）</h3>
-                                    <p>中段、またの名を十二直といいます。暦注の一つで行動の吉凶を占うものです。</p>
+                                    <p>中段、またの名を十二直といいます。北斗七星に由来する暦注で行動の吉凶を占うものです。</p>
                                 </div>
                                 <div class="legend-bottom">
                                     <h3>⑤祝日名</h3>
@@ -141,18 +143,18 @@
                                     <use xlink:href="svg/legend.svg#main"></use>
                                 </svg>
                                 <div class="legend-left">
-                                    <h3>⑥九星</h3>
-                                    <p>日毎に一白・二黒・三碧・四緑・五黄・六白・七赤・八白・九紫が順繰りに変わっていきます。冬至・夏至付近の甲子日に切替えが発生し、それぞれ逆順から正順に、正順から逆順に移ります。</p>
-                                    <h3>⑦六曜</h3>
-                                    <p>日毎に先勝・友引・先負・仏滅・大安・赤口が順繰りに変わっていきます。旧暦１日に決まった位置にリセットされそこから再スタートとなります。一部仏教に関する言葉がありますが仏教とは無関係とのことです。</p>
-                                    <h3>⑧六十干支</h3>
-                                    <p>十干と十二支を組み合わせた、今日を表す呼び名。干と支の両方を一つずつ進めていき、６０日で一周します。１２×１０＝１２０通りとはなりません。</p>
+                                    <h3>⑥<ruby>九星<rt>きゅうせい</rt></ruby></h3>
+                                    <p>陰陽道による暦注で、日毎に<ruby>一白<rt>いっぱく</rt></ruby>・<ruby>二黒<rt>じこく</rt></ruby>・<ruby>三碧<rt>さんぺき</rt></ruby>・<ruby>四緑<rt>しろく</rt></ruby>・<ruby>五黄<rt>ごおう</rt></ruby>・<ruby>六白<rt>ろっぱく</rt></ruby>・<ruby>七赤<rt>しちせき</rt></ruby>・<ruby>八白<rt>はっぱく</rt></ruby>・<ruby>九紫<rt>きゅうし</rt></ruby>が順繰りに変わっていきます。冬至・夏至付近の甲子日を境に、それぞれ昇順に順繰りする陽遁に、降順に順繰りする隠遁に切り替わります。</p>
+                                    <h3>⑦<ruby>六曜<rt>ろくよう</rt></ruby></h3>
+                                    <p>俗信に基づく暦注で、日毎に<ruby>先勝<rt>せんしょう</rt></ruby>・<ruby>友引<rt>ともびき</rt></ruby>・<ruby>先負<rt>せんぶ</rt></ruby>・<ruby>仏滅<rt>ぶつめつ</rt></ruby>・<ruby>大安<rt>たいあん</rt></ruby>・<ruby>赤口<rt>しゃっこう</rt></ruby>（読みは複数あるため一例）が順繰りに変わっていきます。旧暦１日に決まった位置にリセットされそこから再スタートとなります。一部仏教に関する言葉がありますが仏教とは無関係とのことです。</p>
+                                    <h3>⑧<ruby>六十干支<rt>ろくじっかんし</rt></ruby></h3>
+                                    <p><ruby>十干<rt>じっかん</rt></ruby>と<ruby>十二支<rt>じゅうにし</rt></ruby>を組み合わせた、今日を表す呼び名。干と支の両方を一つずつ進めていき、６０日で一周します。１２×１０＝１２０通りとはなりません。</p>
                                     <h3>⑨旧暦</h3>
                                     <p>改暦以前の暦による日付です。月の満ち欠けを基準として新月で月を改め１日とするのに加え太陽の運行から閏月を挿入する太陰太陽暦です。</p>
                                 </div>
                                 <div class="legend-bottom">
-                                    <h3>⑩月の朔望・潮汐</h3>
-                                    <p>月の満ち欠けを図で表し、朔弦望の時には潮汐とともに記します。潮汐は気象庁の定義を使用しており他と異なる場合があります。</p>
+                                    <h3>⑩月の<ruby>朔望<rt>さくぼう</rt></ruby>・<ruby>潮汐<rt>ちょうせき</rt></ruby></h3>
+                                    <p>月の満ち欠けを図で表し、<ruby>朔弦望<rt>さくげんぼう</rt></ruby>の時には潮汐とともに記します。潮汐は気象庁の定義を使用しており他と異なる場合があります。</p>
                                 </div>
                             </div>
                         </section>
@@ -163,10 +165,11 @@
                                     <use xlink:href="svg/legend.svg#main"></use>
                                 </svg>
                                 <div class="legend-left">
-                                    <h3>⑪七十二候</h3>
+                                    <h3>⑪七十二候（および二十四節気）</h3>
                                     <p>太陽の黄道経度から二十四節気より細かな気候を表現します。読みと説明の出典はウィキペディアより。</p>
-                                    <h3>⑫二十八宿</h3>
-                                    <p>暦注の一つ。天球を２８に分け、その単位を宿といい、日毎に順繰りに割り当てられます。右側吉凶説明の出典はウィキペディアより。</p>
+                                    <p>また、二十四節気にあたる日にはその名称も加えて表示します。</p>
+                                    <h3>⑫<ruby>二十八宿<rt>にじゅうはっしゅく</rt></ruby></h3>
+                                    <p>占星術に基づく暦注の一つ。天球を２８に分け、その単位を<ruby>宿<rt>しゅく</rt></ruby>といい、日毎に順繰りに割り当てられます。右側吉凶説明の出典はウィキペディアより。</p>
                                     <h3>⑬月カレンダー</h3>
                                     <p>右に当月、左に来月を配しています。○数字は祝日です。（一部ブラウザでは□数字になります。）</p>
                                 </div>
@@ -198,6 +201,10 @@
                         <section class="about-app-page">
                             <h2>更新履歴</h2>
                             <dl>
+                                <dt>Ver. 1.3.0 - 2023/5/9</dt>
+                                <dd>二十四節気にあたる日にその名称を七十二候の隣に表示するように<br>
+                                    記念日いくつか追加および修正<br>
+                                    カレンダーの見方の説明にルビを振ったり追記したり</dd>
                                 <dt>Ver. 1.2.3 - 2023/2/24</dt>
                                 <dd>日の「4」の字形を変更</dd>
                                 <dt>Ver. 1.2.2 - 2023/2/23</dt>
