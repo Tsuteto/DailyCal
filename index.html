@@ -3,8 +3,11 @@
 <head>
     <title>日めくりカレンダー</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="manifest" href="manifest.json"/>
+    <link rel="apple-touch-icon" href="img/app-icon-sp.png" sizes="512x512"/>
     <link rel="stylesheet" href="dist/main.css"/>
     <script src="dist/app.js"></script>
+    <meta name="description" content="クラシックで和風な日めくりカレンダーです。インテリアとしてデスクトップに飾ってみてはいかがでしょうか。"/>
 
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="日めくりカレンダー"/>
@@ -201,6 +204,9 @@
                         <section class="about-app-page">
                             <h2>更新履歴</h2>
                             <dl>
+                                <dt>Ver. 1.4.0 - 2023/7/10</dt>
+                                <dd>PWAに対応してみた（Webフォントの関係でオフラインじゃ動かないけど）<br>
+                                    記念日に月遅れぼん迎え火を追加</dd>
                                 <dt>Ver. 1.3.0 - 2023/5/9</dt>
                                 <dd>二十四節気にあたる日にその名称を七十二候の隣に表示するように<br>
                                     記念日いくつか追加および修正<br>
@@ -279,7 +285,7 @@
                 <svg><use xlink:href="svg/gear.svg#main"></use></svg><br>
                 設定
             </button>
-            <div class="version">Ver. 1.3.0</div>
+            <div class="version">Ver. 1.4.0</div>
         </div>
         <div class="control-panel control-sub hidden">
             <button class="btn btn-close">

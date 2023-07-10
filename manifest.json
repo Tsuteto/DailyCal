@@ -1,0 +1,21 @@
+{
+  "name": "クラシック日めくりカレンダー",
+  "short_name": "日めくり",
+  "background_color": "white",
+  "icons": [{
+      "src": "img/app-icon-pc.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "img/app-icon-sp.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+],
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone"
+}

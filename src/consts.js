@@ -623,8 +623,10 @@ export class Consts {
             {date: "08/01", onLunarCal: false, name: "八朔"},
             {date: "08/01", onLunarCal: true, name: "旧八朔"},
             {date: "08/02", onLunarCal: true, name: "二日灸"},
+            {date: "08/13", onLunarCal: false, name: "月遅れぼん迎え火", since: 1945},
             {date: "08/15", onLunarCal: false, name: "月遅れぼん"},
             {date: "08/15", onLunarCal: true, name: "十五夜"},
+            {date: "08/16", onLunarCal: false, name: "月遅れぼん送り火", since: 1945},
             {date: "08/24", onLunarCal: false, name: "月遅れ地蔵盆"},
     
             {date: "08/01", onLunarCal: false, name: "水の日", since: 1977},
@@ -655,7 +657,6 @@ export class Consts {
             {date: "08/13", onLunarCal: false, name: "左利きの日", since: 1990},
             {date: "08/14", onLunarCal: false, name: "水泳の日", since: 2014},
             {date: "08/15", onLunarCal: false, name: "終戦記念日", since: 1945},
-            {date: "08/16", onLunarCal: false, name: "月遅れぼん送り火", since: 1945},
             {date: "08/17", onLunarCal: false, name: "パイナップルの日"},
             {date: "08/18", onLunarCal: false, name: "高校野球記念日", since: 1915},
             {date: "08/18", onLunarCal: false, name: "米の日", since: 1978},

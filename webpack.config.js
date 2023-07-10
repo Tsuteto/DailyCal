@@ -1,6 +1,8 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
- 
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const cacheId = 'dailycal';
+
 module.exports = {
   entry: './src/app.js',
   output: {
@@ -37,6 +39,14 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'main.css',
-    })
+    }),
+    new WorkboxPlugin.GenerateSW({
+      directoryIndex: '/',
+      cacheId: cacheId,
+      swDest: '/sw.js',
+      clientsClaim: true,
+      skipWaiting: true,
+      cleanupOutdatedCaches: true
+    }),
   ]
 };

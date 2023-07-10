@@ -814,6 +814,7 @@ section.monthlycal .combined .holiday {
 
 .paper.about-app .about-app-page {
     display: none;
+    overflow-y: auto;
 }
 .paper.about-app .about-app-page.show {
     display: block;
@@ -949,6 +950,7 @@ section.monthlycal .combined .holiday {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 3vmin;
 }
 
 .paper.about-app .page-no {

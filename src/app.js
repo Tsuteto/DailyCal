@@ -5,6 +5,16 @@ import './main.scss';
 import {Consts} from "./consts.js";
 import {kyureki, calc_chu, calc_saku, LONGITUDE_SUN, LONGITUDE_MOON, rm_sun0} from "../lib/qreki.js";
 
+if ('serviceWorker' in navigator) {
+    console.log('Found serviceWorker');
+    navigator.serviceWorker.register('./dist/sw.js')
+        .then((reg) => {
+            console.log('Service Worker Registered', reg);
+        });
+} else {
+    console.log('Not Found serviceWorker');
+}
+
 (function(d) {
     var config = {
         kitId: 'lci4uwv',
